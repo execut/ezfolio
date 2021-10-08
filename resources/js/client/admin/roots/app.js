@@ -14,7 +14,7 @@ import ConfigureStore from '../redux/ConfigureStore';
 import PrivateRoute from '../components/PrivateRoute';
 import loadable from '@loadable/component';
 import ZLayout from '../components/layout/ZLayout';
-import LazyLoadingFallbackUi from '../../common/components/lazyLoadingFallbackUi/lazyLoadingFallbackUi';
+import LazyLoadingFallbackUi from '../../common/components/lazyLoadingFallbackUi/LazyLoadingFallbackUi';
 import { setupInterceptors } from '../../common/helpers/HTTP';
 import Utils from '../../common/helpers/Utils';
 const NotFound = loadable(() => import('../components/Notfound'));
@@ -23,8 +23,8 @@ const store = ConfigureStore();
 
 /**
  * Remove an element by showing fade out effect
- * 
- * @param Element el 
+ *
+ * @param Element el
  * @param int speed in millisecond
  */
 const fadeoutAndRemoveElement = (el, speed) => {
@@ -66,10 +66,10 @@ const App = () => {
     const dispatch = useDispatch();
 
     /**
-     * Below settings are coming from 
+     * Below settings are coming from
      * resources/views/admin/app.blade.php
      * line 17. Ideally to get the settings, a request should be made to api.
-     * 
+     *
      * But to keep it simple, we are passing the values in a constant which is
      * already declared in that mentioned file.
      */
@@ -77,7 +77,7 @@ const App = () => {
     let mySettings = settings;
 
     const apiToken = (localStorage.getItem("apiToken") !== 'undefined' && localStorage.getItem("apiToken") !== null) ? localStorage.getItem("apiToken") : null;
-    
+
     dispatch(initializeGlobalState({
         apiToken: apiToken,
         accentColor: mySettings.accentColor,
@@ -96,7 +96,7 @@ const App = () => {
     useEffect(()=> {
         //remove preloader
         let preloader = document.getElementById("szn-preloader");
-        
+
         if (preloader) {
              fadeoutAndRemoveElement(preloader, 1000);
         }
@@ -112,7 +112,7 @@ const App = () => {
                 <ConfigProvider locale={enUSIntl}>
                     <BrowserRouter>
                         <Switch>
-                            
+
                             {/* public routes */}
                             {publicRoutes()}
 
@@ -135,7 +135,7 @@ const App = () => {
                             <Route path={Routes.web.admin.notFound}>
                                 <NotFound/>
                             </Route>
-                            
+
                         </Switch>
                     </BrowserRouter>
                 </ConfigProvider>
